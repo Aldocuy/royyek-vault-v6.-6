@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html lang="id" data-theme="dark">
 <head>
+    <!-- ==========================================
+         📦 KONFIGURASI HALAMAN & METADATA
+         ========================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Royyek Vault - Premium Cloud v6.6</title>
+    
+    <!-- Load font dari Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Load icon Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
+        /* ==========================================
+           🎨 VARIABEL WARNA MODE GELAP (Default)
+           ========================================== */
         :root {
             --bg-dark: #0f172a; --body-bg: #0f172a; --bg-surface: #1e293b; --text-main: #ffffff;
             --emerald: #10b981; --slate-300: #cbd5e1; --slate-500: #64748b; --nav-bg: rgba(17, 24, 39, 0.95);
@@ -26,6 +37,10 @@
             --drag-ghost-bg: rgba(16, 185, 129, 0.15); --drag-placeholder-bg: rgba(16, 185, 129, 0.08);
             --drag-handle-color: rgba(255,255,255,0.3);
         }
+        
+        /* ==========================================
+           ☀️ VARIABEL WARNA MODE TERANG
+           ========================================== */
         [data-theme="light"] {
             --bg-dark: #f8fafc; --body-bg: #f0fdf4; 
             --body-bg-gradient: linear-gradient(135deg, #f0fdf4 0%, #eff6ff 50%, #fdf2f8 100%);
@@ -50,17 +65,32 @@
             --drag-ghost-bg: rgba(5, 150, 105, 0.1); --drag-placeholder-bg: rgba(5, 150, 105, 0.05);
             --drag-handle-color: rgba(5, 150, 105, 0.4);
         }
+        
+        /* ==========================================
+           🔧 RESET GLOBAL & GAYA DASAR
+           ========================================== */
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-user-select: none; user-select: none; }
+        
+        /* Elemen yang boleh dipilih/disalin teksnya */
         .note-content, .note-title, #note-isi, .info-row, .pass-text.visible, .form-input, .search-box input, .app-title, .drag-handle {
             -webkit-user-select: text; user-select: text;
         }
+        
         body { 
             background-color: var(--body-bg); font-family: 'Inter', sans-serif; color: var(--text-main); 
             transition: background-color 0.3s, color 0.3s; overflow: hidden; position: fixed; width: 100%; height: 100%; margin: 0; padding: 0;
         }
         [data-theme="light"] body { background: var(--body-bg-gradient); }
+        
+        /* ==========================================
+           📐 CONTAINER UTAMA APLIKASI
+           ========================================== */
         .app-container { max-width: 800px; margin: 0 auto; height: 100vh; height: 100dvh; overflow-y: auto; padding: 0 16px calc(110px + env(safe-area-inset-bottom)) 16px; overscroll-behavior-y: contain; -webkit-overflow-scrolling: touch; }
         [data-theme="dark"] .app-container { background-color: var(--bg-dark); }
+        
+        /* ==========================================
+           📌 HEADER STICKY & AREA PENCARIAN
+           ========================================== */
         .sticky-top-section { position: sticky; top: 0; z-index: 998; padding: 16px; margin: -16px -16px 0 -16px; background-color: rgba(15, 23, 42, 0.35); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom-left-radius: 28px; border-bottom-right-radius: 28px; border-bottom: 1px solid var(--card-border-custom); }
         [data-theme="light"] .sticky-top-section { background-color: transparent; border: none; }
         .sticky-header-wrapper { background-color: var(--header-bg); backdrop-filter: blur(25px); padding: 16px 20px; border: 1px solid var(--card-border-custom); border-bottom: 3px solid var(--accent-color); margin-bottom: 12px; border-radius: 20px; transition: all 0.3s; }
@@ -71,6 +101,10 @@
         h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; line-height: 1.2; }
         .subtitle { font-size: 11px; color: var(--accent-color); font-family: 'JetBrains Mono', monospace; margin-top: 2px; opacity: 0.9; }
         .theme-toggle-btn { background: transparent; border: none; color: var(--theme-toggle-color); font-size: 18px; cursor: pointer; padding: 8px; border-radius: 50%; }
+        
+        /* ==========================================
+           🔍 KOTAK PENCARIAN & DROPDOWN HASIL
+           ========================================== */
         .controls { display: flex; justify-content: center; width: 100%; position: relative; }
         .search-box { position: relative; width: 100%; }
         .search-box i.fa-search { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--slate-500); font-size: 14px; }
@@ -83,6 +117,10 @@
         .search-drop-info { display: flex; align-items: center; gap: 10px; }
         .search-drop-folder { font-size: 11px; background: var(--badge-bg); color: var(--badge-text); padding: 2px 6px; border-radius: 6px; font-weight: 600; }
         .search-drop-row.folder-type { background: rgba(16, 185, 129, 0.06); border: 1px dashed rgba(16, 185, 129, 0.3); margin-bottom: 4px; }
+        
+        /* ==========================================
+            KARTU STATISTIK (KPI)
+           ========================================== */
         .kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 0px; }
         .kpi-card { background: var(--bg-surface); padding: 14px; border-radius: 16px; border: 1px solid var(--card-border-custom); transition: all 0.2s; }
         [data-theme="light"] .kpi-card { box-shadow: var(--card-shadow); border: 1px solid rgba(255,255,255,0.8); }
@@ -93,8 +131,13 @@
         .kpi-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
         .kpi-card:first-child .kpi-label { color: #065f46; } .kpi-card:last-child .kpi-label { color: #1e40af; }
         [data-theme="dark"] .kpi-card:first-child .kpi-label, [data-theme="dark"] .kpi-card:last-child .kpi-label { color: rgba(255,255,255,0.6); }
+        
         #account-list-container { padding-top: 24px; margin-top: 4px; }
         .app-item-row, .note-card, [id^="grup-"], [id^="head-grup-"], .app-detail-content, [id^="cat-"] { scroll-margin-top: 270px; }
+        
+        /* ==========================================
+           📂 SIDEBAR & OVERLAY
+           ========================================== */
         .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         .sidebar-overlay.active { opacity: 1; pointer-events: auto; }
         .sidebar { position: fixed; top: 0; left: -280px; width: var(--sidebar-width); height: 100%; background: var(--bg-surface); z-index: 2001; transition: left 0.3s ease, background 0.3s; padding: 25px 20px; display: flex; flex-direction: column; border-right: 1px solid var(--card-border); }
@@ -111,6 +154,10 @@
         .sidebar-item:hover { background: rgba(16, 185, 129, 0.1); color: var(--accent-color); }
         .sidebar-item.danger:hover { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
         [data-theme="dark"] .sidebar-item:hover { background: rgba(255,255,255,0.05); }
+        
+        /* ==========================================
+           🔘 TOMBOL & FORMULIR
+           ========================================== */
         .btn-pro { background: var(--accent-color); color: #ffffff; padding: 12px 18px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 15px; transition: all 0.2s; }
         .btn-pro:active { transform: scale(0.96); }
         [data-theme="dark"] .btn-pro { color: #0f172a; }
@@ -120,19 +167,50 @@
         .folder-title-text i { font-size: 20px; } 
         .subfolder-wrapper { margin-left: 14px; padding-left: 10px; border-left: 2px dashed var(--card-border-custom); margin-bottom: 4px; margin-top: 4px; }
         
-        /* 🎯 DRAG & DROP STYLES (Termasuk Antar Folder) */
+        /* ==========================================
+            DRAG & DROP STYLES (Item & Folder)
+           ========================================== */
         .app-item-row.draggable, .note-card.draggable { cursor: grab; transition: transform 0.1s, box-shadow 0.1s; }
         .app-item-row.draggable:active, .note-card.draggable:active { cursor: grabbing; }
         .app-item-row.dragging, .note-card.dragging { opacity: 0.6; transform: scale(1.02); box-shadow: 0 8px 25px rgba(0,0,0,0.3); z-index: 100; }
         .app-item-row.drag-over, .note-card.drag-over { border: 2px dashed var(--accent-color); background: var(--drag-placeholder-bg) !important; }
+        
+        /* 📁 Drag & Drop Folder Styles */
         .folder-header { cursor: pointer; transition: background 0.2s, box-shadow 0.2s, border-radius 0.2s; }
-        .folder-header.folder-drop-active { background: rgba(16, 185, 129, 0.15) !important; box-shadow: inset 0 0 0 2px var(--accent-color); border-radius: 14px !important; }
+        .folder-header.draggable-folder { cursor: grab; }
+        .folder-header.draggable-folder:active { cursor: grabbing; }
+        .folder-header.folder-drop-active { 
+            background: rgba(16, 185, 129, 0.2) !important; 
+            transform: scale(1.02); 
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        /* Indikator drag handle pada folder - DIPERBAIKI POSISI */
+        .folder-header.draggable-folder::before {
+            content: '☰';
+            color: var(--slate-500);
+            font-size: 16px;
+            margin-right: 8px;
+            opacity: 0.6;
+            position: absolute;
+            left: 45px;
+            top: 50%;
+            transform: translateY(-50%);
+            line-height: 1;
+        }
+        .folder-header.draggable-folder:hover::before {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+        
         .drag-handle { color: var(--drag-handle-color); cursor: grab; padding: 4px 8px; margin-right: 4px; display: flex; align-items: center; transition: color 0.2s; }
         .drag-handle:active { cursor: grabbing; color: var(--accent-color); }
         .drag-ghost { position: fixed; background: var(--drag-ghost-bg); border: 2px solid var(--accent-color); border-radius: 12px; padding: 12px 14px; pointer-events: none; z-index: 9999; opacity: 0.95; box-shadow: 0 10px 30px rgba(0,0,0,0.2); max-width: 300px; font-size: 14px; }
         .drag-ghost .app-title { font-size: 13px !important; color: var(--text-main) !important; }
         .drag-ghost .folder-badge { font-size: 10px !important; }
         
+        /* ==========================================
+           📦 BARIS ITEM & KARTU DETAIL
+           ========================================== */
         .app-item-row { background: var(--app-row-bg); border-radius: 12px !important; padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border: none; border-bottom: 1px solid var(--card-border-custom); margin-bottom: 3px; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); color: var(--app-row-text); }
         .app-item-row:hover { background: var(--app-row-hover); border-bottom-color: rgba(255,255,255,0.25); box-shadow: 0 4px 12px rgba(0,0,0,0.15); transform: translateY(-1px); }
         .app-item-row .app-title { font-weight: 700; font-size: 17px; transition: color 0.2s; }
@@ -154,6 +232,10 @@
         .pass-actions i:hover { color: var(--accent-color); }
         .card-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--card-border); }
         .action-btn { background: transparent; border: none; cursor: pointer; font-size: 14px; font-weight: 600; }
+        
+        /* ==========================================
+            KARTU CATATAN
+           ========================================== */
         .note-card { background: var(--note-card-bg); border: 1px solid var(--note-card-border); border-radius: 12px; padding: 14px; margin-bottom: 8px; cursor: pointer; transition: all 0.2s ease; border-left: 3px solid var(--accent-color); }
         .note-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); border-bottom-color: rgba(255,255,255,0.25); }
         .note-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
@@ -163,6 +245,10 @@
         .note-content.expanded { max-height: none; }
         .note-actions { display: flex; justify-content: flex-end; gap: 10px; padding-top: 8px; border-top: 1px dashed var(--card-border); }
         .note-badge { font-size: 10px; background: var(--badge-bg); color: var(--badge-text); padding: 2px 6px; border-radius: 6px; font-weight: 600; margin-left: 8px; }
+        
+        /* ==========================================
+           📲 NAVIGASI BAWAH & DOCK KONFIGURASI
+           ========================================== */
         .premium-dock-bottom { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 999; background-color: var(--nav-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--card-border-custom); border-top-left-radius: 24px; border-top-right-radius: 24px; display: flex; flex-direction: column; padding-bottom: calc(env(safe-area-inset-bottom) / 2); transition: background-color 0.3s, border-color 0.3s; box-shadow: 0 -4px 20px rgba(0,0,0,0.05); }
         .config-box { background: rgba(0, 0, 0, 0.4); border: 1px solid var(--card-border-custom); border-radius: 16px; padding: 10px 14px; margin: 14px 16px 4px 16px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: space-between; gap: 12px; transition: all 0.3s; }
         [data-theme="light"] .config-box { background: #ffffff; border: 1px solid #e2e8f0; box-shadow: var(--card-shadow); }
@@ -182,12 +268,68 @@
         .floating-popup-menu { display: none; position: fixed; bottom: 175px; left: 50%; transform: translateX(-50%); background: var(--bg-surface); border: 1px solid var(--card-border); border-radius: 12px; z-index: 1000; min-width: 170px; transition: background 0.3s; }
         .floating-popup-item { padding: 14px 18px; color: var(--text-main); cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 12px; }
         [data-theme="light"] .floating-popup-menu { box-shadow: var(--card-shadow-hover); }
+        
+        /* ==========================================
+           🪟 MODAL & DROPDOWN LAYER
+           ========================================== */
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none; place-items: center; z-index: 1001; padding: 15px; }
         .modal { background: var(--bg-surface); width: 100%; max-width: 450px; padding: 22px; border-radius: 16px; max-height: 90vh; overflow-y: auto; transition: background 0.3s; }
         [data-theme="light"] .modal { box-shadow: var(--card-shadow-hover); }
         .form-input { width: 100%; padding: 12px; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 8px; color: var(--text-main); margin-bottom: 12px; font-size: 15px; transition: 0.2s; }
         [data-theme="light"] .form-input { border-color: #cbd5e1; } [data-theme="light"] .form-input:focus { border-color: #059669; background: #ffffff; }
         textarea.form-input { min-height: 120px; resize: vertical; }
+        
+        /* ==========================================
+            INPUT KATEGORI CUSTOM (Bisa Diketik + Dropdown)
+           ========================================== */
+        .kategori-input-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+        .kategori-input {
+            flex: 1;
+            padding: 14px 50px 14px 14px;
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px 0 0 8px;
+            color: var(--text-main);
+            font-size: 15px;
+            transition: 0.2s;
+            outline: none;
+            user-select: text;
+            -webkit-user-select: text;
+        }
+        .kategori-input:focus {
+            border-color: var(--accent-color);
+            background: rgba(0,0,0,0.4);
+        }
+        [data-theme="light"] .kategori-input:focus {
+            border-color: #059669;
+            background: #ffffff;
+        }
+        .kategori-dropdown-btn {
+            padding: 14px 16px;
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            border-left: none;
+            border-radius: 0 8px 8px 0;
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .kategori-dropdown-btn:hover {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-color);
+        }
+        
         .custom-select-box { width: 100%; padding: 14px; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 8px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
         .dropdown-modal-layer { position: fixed; inset: 0; background: rgba(2, 6, 23, 0.4); display: none; justify-content: center; align-items: center; z-index: 2010; padding: 20px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
         [data-theme="dark"] .dropdown-modal-layer { background: rgba(2, 6, 23, 0.65); }
@@ -199,9 +341,17 @@
         [data-theme="dark"] .dropdown-option-row:hover { background: rgba(255, 255, 255, 0.03); }
         .delete-kat-btn { background: var(--delete-btn-bg); border: none; color: var(--delete-btn-text); padding: 10px; border-radius: 10px; cursor: pointer; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
         .delete-kat-btn:hover { background: rgba(244, 63, 94, 0.2); }
+        
+        /* ==========================================
+           🍞 NOTIFIKASI TOAST
+           ========================================== */
         .toast-container { position: fixed; top: 30px; left: 50%; transform: translateX(-50%); z-index: 10000; display: flex; flex-direction: column; gap: 10px; width: 90%; max-width: 320px; pointer-events: none; }
         .premium-toast { background: var(--bg-surface); border: 1px solid var(--card-border-custom); border-bottom: 3px solid var(--accent-color); padding: 14px 18px; border-radius: 14px; color: var(--text-main); font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 12px; animation: slideDownIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         @keyframes slideDownIn { 0% { transform: translateY(-20px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+        
+        /* ==========================================
+           🔐 ANTARMUKA LOCKSCREEN
+           ========================================== */
         .lock-screen-modern { position: fixed; inset: 0; background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; overflow: hidden; }
         .lock-bg-gradient { position: absolute; inset: -50%; background: radial-gradient(ellipse at 30% 20%, rgba(16, 185, 129, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(59, 130, 246, 0.12) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 70%); animation: gradientPulse 8s ease-in-out infinite; pointer-events: none; }
         @keyframes gradientPulse { 0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; } 50% { transform: scale(1.1) rotate(2deg); opacity: 1; } }
@@ -257,6 +407,10 @@
         [data-theme="light"] .forgot-btn { color: #64748b; } [data-theme="light"] .forgot-btn:hover { color: #059669; }
         [data-theme="light"] .lock-feedback { background: rgba(255, 255, 255, 0.95); } [data-theme="light"] .feedback-text { color: #334155; }
         [data-theme="light"] .logo-icon { background: linear-gradient(135deg, #34d399, #10b981); box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.3); }
+        
+        /* ==========================================
+           ⚙️ PENGATURAN TOGGLE
+           ========================================== */
         .toggle-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--card-border); margin-bottom: 15px; }
         .toggle-label { font-size: 14px; color: var(--text-main); font-weight: 500; display: flex; align-items: center; gap: 8px; }
         .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
@@ -265,6 +419,10 @@
         .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
         input:checked + .slider { background-color: var(--accent-color); }
         input:checked + .slider:before { transform: translateX(20px); }
+        
+        /* ==========================================
+           🎨 WARNA KHUSUS (Permintaan User)
+           ========================================== */
         .at-symbol { color: #facc15 !important; font-weight: 700; margin-right: 2px; }
         .label-user { color: #60a5fa !important; font-weight: 600; margin-right: 4px; }
         .label-email { color: #34d399 !important; font-weight: 600; margin-right: 4px; }
@@ -273,6 +431,10 @@
         .search-drop-username { font-size: 15px !important; font-weight: 600 !important; color: var(--slate-300) !important; display: flex; align-items: center; gap: 2px; }
         .search-drop-at { color: #facc15 !important; font-weight: 700 !important; }
         [data-theme="light"] .search-drop-username { color: #475569 !important; }
+        
+        /* ==========================================
+           📁 PENYESUAIAN JARAK COMPACT
+           ========================================== */
         [id^="cat-"] { margin-bottom: 6px !important; } [id^="cat-"] > div:first-child { margin-bottom: 1px !important; }
         .subfolder-wrapper { margin-left: 12px !important; padding-left: 8px !important; margin: 2px 0 !important; }
         .app-item-row { margin-bottom: 2px !important; padding: 8px 12px !important; }
@@ -283,8 +445,14 @@
 </head>
 <body>
 
+<!-- ==========================================
+     🍞 WADAH NOTIFIKASI TOAST
+     ========================================== -->
 <div id="toast-container" class="toast-container"></div>
 
+<!-- ==========================================
+     🔐 HALAMAN LOCKSCREEN
+     ========================================== -->
 <div id="lockScreen" class="lock-screen-modern">
     <div class="lock-bg-gradient"></div>
     <div class="lock-bg-particles" id="lockParticles"></div>
@@ -310,10 +478,13 @@
     </div>
     <div class="lock-footer">
         <p><i class="fa-solid fa-lock"></i> Dilindungi dengan enkripsi end-to-end</p>
-        <p class="lock-version">v6.6 • Drag-Drop Antar Folder + Real-Time Sync</p>
+        <p class="lock-version">v6.6 • Drag-Drop Folder + Item + Real-Time Sync</p>
     </div>
 </div>
 
+<!-- ==========================================
+     📂 SIDEBAR MENU & OVERLAY
+     ========================================== -->
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar(false)"></div>
 <div class="sidebar" id="sidebarMenu">
     <div class="sidebar-header">
@@ -336,6 +507,9 @@
     </div>
 </div>
 
+<!-- ==========================================
+     📱 KONTAINER UTAMA APLIKASI
+     ========================================== -->
 <div class="app-container">
     <div class="sticky-top-section">
         <div class="sticky-header-wrapper">
@@ -358,22 +532,34 @@
                 </div>
             </div>
         </div>
+        
+        <!-- ==========================================
+             📊 KARTU STATISTIK (KPI)
+             ========================================== -->
         <div class="kpi-grid">
             <div class="kpi-card"><p class="kpi-label" id="kpi-label-1">Total Akun</p><div class="kpi-value" id="dash-total">0</div></div>
             <div class="kpi-card"><p class="kpi-label" id="kpi-label-2">Total Kategori</p><div class="kpi-value" id="dash-cats">0</div></div>
         </div>
         <h2 id="nama-menu-halaman" class="nama-menu-h2">Beranda</h2>
     </div>
+    
+    <!-- WADAH DAFTAR DATA -->
     <div class="account-list" id="account-list-container">
         <p style="text-align: center; color: var(--slate-500); font-size: 15px; padding: 20px;">Memuat database aman...</p>
     </div>
 </div>
 
+<!-- ==========================================
+     🎯 MENU FLOATING ACTION
+     ========================================== -->
 <div id="floating-menu" class="floating-popup-menu">
     <div class="floating-popup-item" onclick="bukaMenuTambah()"><i class="fa-solid fa-key" style="color: var(--accent-color);"></i> Tambah Akun</div>
     <div class="floating-popup-item" id="floating-note-btn" onclick="bukaMenuTambahNote()" style="display:none;"><i class="fa-solid fa-note-sticky" style="color: var(--accent-color);"></i> Tambah Catatan</div>
 </div>
 
+<!-- ==========================================
+      NAVIGASI BAWAH & CONFIG DB
+     ========================================== -->
 <div class="premium-dock-bottom">
     <div class="config-box">
         <p><i class="fa-solid fa-link" style="color: var(--accent-color); margin-right: 6px;"></i> DB:</p>
@@ -389,14 +575,22 @@
     </nav>
 </div>
 
+<!-- ==========================================
+      MODAL: TAMBAH/EDIT AKUN VAULT
+     ========================================== -->
 <div class="modal-overlay" id="entryModal">
     <div class="modal">
         <h3 id="modal-title" style="margin-bottom:15px; color:var(--accent-color);">Kredensial Baru</h3>
         <form id="account-form">
             <input type="hidden" id="entry-id">
             <input type="hidden" id="entry-type" value="vault">
-            <div class="custom-select-box" onclick="bukaCustomDropdownLayer()"><span id="selected-kategori-view">-- Pilih Kategori --</span><i class="fa-solid fa-caret-down"></i></div>
-            <input type="text" id="entry-kategori-baru" class="form-input" placeholder="Kategori Baru... (Gunakan / untuk sub-folder)" style="display:none;">
+            
+            <!-- ✅ INPUT KATEGORI: Bisa diketik + tombol dropdown -->
+            <div class="kategori-input-wrapper">
+                <input type="text" id="kategori-input" class="kategori-input" placeholder="Ketik atau pilih kategori...">
+                <button type="button" class="kategori-dropdown-btn" onclick="bukaCustomDropdownLayer()"><i class="fa-solid fa-caret-down"></i></button>
+            </div>
+            
             <input type="text" id="entry-app" class="form-input" placeholder="Nama Aplikasi">
             <input type="text" id="entry-username" class="form-input" placeholder="Username">
             <input type="text" id="entry-email" class="form-input" placeholder="Email">
@@ -411,14 +605,22 @@
     </div>
 </div>
 
+<!-- ==========================================
+      MODAL: TAMBAH/EDIT CATATAN
+     ========================================== -->
 <div class="modal-overlay" id="noteModal">
     <div class="modal">
         <h3 id="note-modal-title" style="margin-bottom:15px; color:var(--accent-color);">Catatan Baru</h3>
         <form id="note-form">
             <input type="hidden" id="note-id">
             <input type="hidden" id="note-type" value="notes">
-            <div class="custom-select-box" onclick="bukaCustomDropdownLayer('notes')"><span id="selected-note-kategori">-- Pilih Kategori --</span><i class="fa-solid fa-caret-down"></i></div>
-            <input type="text" id="note-kategori-baru" class="form-input" placeholder="Kategori Baru... (Gunakan / untuk sub-folder)" style="display:none;">
+            
+            <!-- ✅ INPUT KATEGORI: Bisa diketik + tombol dropdown -->
+            <div class="kategori-input-wrapper">
+                <input type="text" id="note-kategori-input" class="kategori-input" placeholder="Ketik atau pilih kategori...">
+                <button type="button" class="kategori-dropdown-btn" onclick="bukaCustomDropdownLayer('notes')"><i class="fa-solid fa-caret-down"></i></button>
+            </div>
+            
             <input type="text" id="note-judul" class="form-input" placeholder="Judul Catatan *" required>
             <textarea id="note-isi" class="form-input" placeholder="Isi catatan..."></textarea>
             <div style="display:flex; gap:12px; margin-top:15px;">
@@ -429,6 +631,9 @@
     </div>
 </div>
 
+<!-- ==========================================
+      MODAL: PENGATURAN PIN
+     ========================================== -->
 <div class="modal-overlay" id="pinSettingsModal">
     <div class="modal">
         <h3 style="margin-bottom:15px; color:var(--accent-color);"><i class="fa-solid fa-key"></i> Pengaturan PIN</h3>
@@ -455,6 +660,9 @@
     </div>
 </div>
 
+<!-- ==========================================
+     📂 DROPDOWN PEMILIH KATEGORI
+     ========================================== -->
 <div id="dropdownLayerModal" class="dropdown-modal-layer" onclick="tutupCustomDropdownLayer()">
     <div class="dropdown-card" onclick="event.stopPropagation()">
         <div class="dropdown-options-list" id="custom-options-container"></div>
@@ -462,9 +670,16 @@
     </div>
 </div>
 
+<!-- ==========================================
+     🧠 JAVASCRIPT ENGINE UTAMA
+     ========================================== -->
 <script>
 (function() {
     'use strict';
+    
+    // ==========================================
+    // 📦 INISIALISASI VARIABEL & STATE GLOBAL
+    // ==========================================
     let apiUrl = localStorage.getItem('vault_api_url') || "";
     let accounts = [];
     let notes = [];
@@ -487,13 +702,25 @@
         longPressThreshold: 300
     };
     
+    // 📁 STATE DRAG & DROP FOLDER
+    let draggedFolder = null;
+    let draggedFolderType = null;
+    
     const DEFAULT_PIN_HASH = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4";
+    
+    // ==========================================
+    // 🔐 FUNGSI KRIPTO & PIN
+    // ==========================================
     function getPinHash() { return localStorage.getItem('vault_pin_hash') || DEFAULT_PIN_HASH; }
     async function hashPin(pin) {
         const buffer = new TextEncoder().encode(pin);
         const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
         return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
     }
+    
+    // ==========================================
+    //  INISIALISASI SAAT HALAMAN DIMUAT
+    // ==========================================
     window.onload = function() {
         document.getElementById('api-url-input').value = apiUrl;
         const savedTheme = localStorage.getItem('vault_theme') || 'dark';
@@ -510,12 +737,18 @@
         }
         if(apiUrl) fetchData();
     };
+    
+    // ==========================================
+    // 🖱️ PENANGKAP KLIK GLOBAL
+    // ==========================================
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.search-box')) { document.getElementById('searchDropdownContainer').style.display = 'none'; }
         document.getElementById('floating-menu').style.display = 'none';
     });
     
-    // 🎯 EVENT HANDLER DRAG & DROP
+    // ==========================================
+    // 🎯 EVENT HANDLER DRAG & DROP (Item)
+    // ==========================================
     function initDragEvents() {
         document.addEventListener('touchstart', handleDragStart, { passive: false });
         document.addEventListener('touchmove', handleDragMove, { passive: false });
@@ -556,7 +789,6 @@
             const dropFolder = target?.closest('.folder-header');
             
             if (dropFolder && dragState.draggedCategory !== dropFolder.dataset.category) {
-                // ✅ Drop di Header Folder -> Pindah Kategori
                 moveToCategory(dragState.draggedItem, dropFolder.dataset.category, dragState.draggedType);
             } else if (dropItem && dropItem !== dragState.draggedItem) {
                 const dropType = dropItem.id.startsWith('row-app-') ? 'vault' : 'notes';
@@ -564,10 +796,8 @@
                 
                 if (dragState.draggedType === dropType) {
                     if (dragState.draggedCategory === dropCategory) {
-                        // ✅ Folder sama -> Reorder
                         reorderItems(dragState.draggedItem.id, dropItem.id, dragState.draggedType);
                     } else {
-                        // ✅ Folder beda -> Pindah Kategori
                         moveToCategory(dragState.draggedItem, dropCategory, dragState.draggedType);
                     }
                 }
@@ -629,7 +859,9 @@
         dragState.isDragging = false; dragState.draggedItem = null; dragState.draggedType = null; dragState.draggedCategory = null;
     }
     
-    // 🔄 REORDER DALAM FOLDER SAMA
+    // ==========================================
+    // 🔄 REORDER ITEM DALAM FOLDER SAMA
+    // ==========================================
     function reorderItems(draggedId, targetId, type) {
         const dataArray = type === 'vault' ? accounts : notes;
         const dragId = draggedId.replace('row-app-', '').replace('row-note-', '');
@@ -640,11 +872,13 @@
         const [moved] = dataArray.splice(draggedIdx, 1);
         dataArray.splice(targetIdx, 0, moved);
         if (type === 'vault') filterVault(); else renderNotes(notes);
-        showToast(" Urutan diperbarui", "fa-sort");
+        showToast("📋 Urutan diperbarui", "fa-sort");
         syncItemOrder(dataArray, type);
     }
     
+    // ==========================================
     // 📦 PINDAH ITEM KE FOLDER LAIN
+    // ==========================================
     function moveToCategory(itemEl, targetCategory, type) {
         const itemId = itemEl.id.replace('row-app-', '').replace('row-note-', '');
         const dataArray = type === 'vault' ? accounts : notes;
@@ -661,7 +895,9 @@
         syncCategoryChange(itemId, targetCategory, type);
     }
     
-    // ☁️ SINKRON URUTAN KE CLOUD
+    // ==========================================
+    // ☁️ SINKRON URUTAN ITEM KE CLOUD
+    // ==========================================
     async function syncItemOrder(dataArray, type) {
         if (!apiUrl) return;
         const orderData = dataArray.map((item, index) => ({ id: item.id, order: index }));
@@ -674,7 +910,9 @@
         } catch (e) { console.warn('Order sync failed:', e); }
     }
     
+    // ==========================================
     // ☁️ SINKRON PERUBAHAN KATEGORI KE CLOUD
+    // ==========================================
     async function syncCategoryChange(id, newCategory, type) {
         if (!apiUrl) return;
         try {
@@ -686,7 +924,95 @@
             await fetch(apiUrl, { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: params });
         } catch (e) { console.warn('Category sync failed:', e); }
     }
-
+    
+    // ==========================================
+    // 📁 DRAG & DROP REORDER FOLDER
+    // ==========================================
+    function handleFolderDragStart(e, category) {
+        draggedFolder = category;
+        draggedFolderType = currentTab === 'catatan' ? 'notes' : 'vault';
+        e.target.style.opacity = '0.5';
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', category);
+    }
+    function handleFolderDragOver(e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        const folderEl = e.target.closest('.folder-header');
+        if (folderEl && folderEl.dataset.category !== draggedFolder) {
+            folderEl.classList.add('folder-drop-active');
+        }
+    }
+    function handleFolderDrop(e, targetCategory) {
+        e.preventDefault();
+        const folderEl = e.target.closest('.folder-header');
+        if (folderEl) folderEl.classList.remove('folder-drop-active');
+        
+        if (draggedFolder && draggedFolder !== targetCategory) {
+            reorderFolders(draggedFolder, targetCategory, draggedFolderType);
+        }
+    }
+    document.addEventListener('dragend', function(e) {
+        if (e.target.classList.contains('folder-header')) {
+            e.target.style.opacity = '1';
+            document.querySelectorAll('.folder-header').forEach(el => {
+                el.classList.remove('folder-drop-active');
+            });
+        }
+    });
+    
+    // ==========================================
+    // 🔄 REORDER FOLDER LOGIC
+    // ==========================================
+    function reorderFolders(draggedCat, targetCat, type) {
+        const allFolders = [...new Set(
+            (type === 'notes' ? notes : accounts).map(item => item.kategori)
+        )].filter(cat => cat && cat.trim() !== '');
+        
+        const draggedIdx = allFolders.indexOf(draggedCat);
+        const targetIdx = allFolders.indexOf(targetCat);
+        
+        if (draggedIdx === -1 || targetIdx === -1) return;
+        
+        allFolders.splice(draggedIdx, 1);
+        allFolders.splice(targetIdx, 0, draggedCat);
+        
+        syncFolderOrder(allFolders, type);
+        
+        showToast(`📁 Folder "${draggedCat}" dipindahkan`, "fa-folder-open");
+        
+        if (type === 'vault') {
+            filterVault();
+        } else {
+            renderNotes(notes);
+        }
+    }
+    
+    // ==========================================
+    // ☁️ SINKRON URUTAN FOLDER KE SPREADSHEET
+    // ==========================================
+    async function syncFolderOrder(folderOrder, type) {
+        if (!apiUrl) return;
+        
+        try {
+            const params = new URLSearchParams();
+            params.append('action', 'reorder_folders');
+            params.append('data_type', type);
+            params.append('folder_order', JSON.stringify(folderOrder));
+            
+            await fetch(apiUrl, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: params
+            });
+        } catch (e) {
+            console.warn('Folder order sync failed:', e);
+        }
+    }
+    
+    // ==========================================
+    // 🎨 FUNGSI UTILITAS TEMA & UI
+    // ==========================================
     function toggleThemeMode() {
         const current = document.documentElement.getAttribute('data-theme') || 'dark';
         const target = current === 'dark' ? 'light' : 'dark';
@@ -708,6 +1034,10 @@
         c.appendChild(t);
         setTimeout(function() { t.remove(); }, 2000);
     }
+    
+    // ==========================================
+    // 🔐 LOGIKA INPUT & VERIFIKASI PIN
+    // ==========================================
     function handlePinInput(input) {
         const val = input.value;
         const dots = document.querySelectorAll('#pinDots .dot');
@@ -762,6 +1092,10 @@
         if (!inputUrl.startsWith("https://script.google.com/")) { showToast("URL tidak valid!", "fa-triangle-exclamation"); return; }
         apiUrl = inputUrl; localStorage.setItem('vault_api_url', apiUrl); showToast("✅ Berhasil terhubung!", "fa-check-circle"); fetchData();
     }
+    
+    // ==========================================
+    // 📡 FUNGSI PENGAMBILAN & SINKRONISASI DATA
+    // ==========================================
     async function fetchData(dataType, skipTabChange) {
         if (!apiUrl) { showToast("⚠️ URL Database belum diatur!", "fa-database"); return; }
         showToast(" Sinkronisasi...", "fa-sync");
@@ -779,6 +1113,10 @@
             showToast("✅ Sinkronisasi berhasil!", "fa-check-circle");
         } catch(e) { console.error('❌ Fetch error:', e); document.getElementById('account-list-container').innerHTML = '<p style="text-align:center; color:#ef4444;">Gagal sinkronisasi data cloud.<br><small>' + e.message + '</small></p>'; showToast("❌ Gagal sinkronisasi!", "fa-circle-xmark"); }
     }
+    
+    // ==========================================
+    // 📊 FUNGSI PEMBARUAN STATISTIK REAL-TIME
+    // ==========================================
     function renderStats() { 
         if (currentTab === 'catatan') { renderNotesStats(); return; } 
         else if (currentTab === 'favorit') {
@@ -801,6 +1139,10 @@
         else { document.getElementById('kpi-label-1').innerText = 'Total Akun'; document.getElementById('kpi-label-2').innerText = 'Total Kategori'; }
     }
     function renderNotesStats() { document.getElementById('dash-total').innerText = notes.length; document.getElementById('dash-cats').innerText = [...new Set(notes.map(n => n.kategori))].length; document.getElementById('kpi-label-1').innerText = 'Total Catatan'; document.getElementById('kpi-label-2').innerText = 'Kategori'; }
+    
+    // ==========================================
+    // ⭐ TOGGLE FAVORITE
+    // ==========================================
     async function toggleFavoriteCloud(id, event, dataType) {
         dataType = dataType || 'vault'; event.stopPropagation(); const ic = event.currentTarget;
         const isFav = ic.style.color === 'rgb(250, 204, 21)'; ic.style.color = isFav ? 'var(--slate-500)' : '#facc15';
@@ -815,6 +1157,10 @@
         } catch(e) { showToast("Gagal sync status bintang", "fa-circle-xmark"); fetchData(dataType, true); }
     }
     function togglePasswordEye(id, e) { e.stopPropagation(); const p = document.getElementById('pass-text-' + id); const ic = e.currentTarget; if(p.classList.contains('visible')) { p.classList.remove('visible'); ic.className = 'fa-solid fa-eye'; } else { p.classList.add('visible'); ic.className = 'fa-solid fa-eye-slash'; } }
+    
+    // ==========================================
+    //  FUNGSI IKON APLIKASI
+    // ==========================================
     function dapatkanIkonAplikasi(kat, app) {
         const a = (app || '').toLowerCase(); const k = (kat || '').toLowerCase();
         if(a.includes('royyek')) return 'fa-solid fa-shield-halved'; if(a.includes('google') || a.includes('gmail')) return 'fa-brands fa-google';
@@ -824,6 +1170,10 @@
         if(a.includes('dana') || a.includes('gopay') || a.includes('ovo')) return 'fa-solid fa-wallet'; if(k.includes('medsos')) return 'fa-solid fa-users';
         if(k.includes('keuangan')) return 'fa-solid fa-money-bill-wave'; return 'fa-solid fa-key';
     }
+    
+    // ==========================================
+    // ️ NORMALISASI TEKS (Anti Duplikat)
+    // ==========================================
     function normalizeForComparison(text) {
         if (!text) return '';
         return String(text).toLowerCase().trim()
@@ -831,6 +1181,10 @@
             .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/[\u0000-\u001F\u007F-\u009F]/g, '').replace(/\s+/g, ' ')
             .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
+    
+    // ==========================================
+    // 🛡️ CEK DUPLIKAT VAULT
+    // ==========================================
     function cekDuplikatVault(newData, excludeId) {
         const app = normalizeForComparison(newData.nama_aplikasi);
         const username = normalizeForComparison(newData.username);
@@ -850,6 +1204,10 @@
             return false;
         });
     }
+    
+    // ==========================================
+    // 🛡️ CEK DUPLIKAT CATATAN
+    // ==========================================
     function cekDuplikatNote(newData, excludeId) {
         const judul = normalizeForComparison(newData.judul);
         const kategori = normalizeForComparison(newData.kategori);
@@ -860,6 +1218,10 @@
             return nJudul === judul && nKat === kategori;
         });
     }
+    
+    // ==========================================
+    // ⚠️ TAMPILKAN KONFIRMASI DUPLIKAT
+    // ==========================================
     function tampilkanKonfirmasiDuplikat(duplikat, tipe, onConfirm) {
         const overlay = document.createElement('div');
         overlay.className = 'modal-overlay';
@@ -886,15 +1248,17 @@
         overlay.onclick = (e) => { if (e.target === overlay) document.body.removeChild(overlay); };
     }
     
-    //  RENDER KARTU VAULT (Folder header sekarang punya class & data-category untuk drop target)
+    // ==========================================
+    // 📦 RENDER KARTU VAULT
+    // ==========================================
     function renderCards(data) {
         const c = document.getElementById('account-list-container');
         if(data.length === 0) { c.innerHTML = '<p style="text-align:center;color:var(--slate-500);padding:20px;">Tidak menemukan data.</p>'; return; }
         const ft = {}; data.forEach(function(i) { const ps = (i.kategori || 'Umum').split('/'); let cl = ft; ps.forEach(function(p, idx) { if(!cl[p]) cl[p] = {_items:[], _subfolders:{}}; if(idx === ps.length - 1) cl[p]._items.push(i); else cl = cl[p]._subfolders; }); });
         function genT(t, pp) { pp = pp || ""; let h = ""; Object.keys(t).forEach(function(fn) { const cf = t[fn]; const fp = pp ? (pp + '/' + fn) : fn; const fid = 'grup-' + fp.replace(/\s+/g, '-').replace(/\//g, '_'); function count(f) { let s = f._items.length; Object.keys(f._subfolders).forEach(function(k) { s += count(f._subfolders[k]); }); return s; } const tot = count(cf); const fo = (filterKategoriAktif && filterKategoriAktif.toLowerCase() === fp.toLowerCase()) ? 'flex' : 'none';
+            // ✅ Folder header dengan drag-drop enabled
             h += '<div style="margin-bottom:6px;background:var(--bg-surface);border-radius:16px;border:1px solid var(--card-border-custom);border-bottom:3px solid var(--folder-border-bottom);width:100%;overflow:visible;">';
-            // ✅ Tambahan class="folder-header" dan data-category agar bisa jadi target drop
-            h += '<div class="folder-header" id="head-' + fid + '" data-category="' + fp + '" onclick="toggleGrupFolder(\'' + fid + '\')" style="padding:12px 14px;display:flex;justify-content:space-between;cursor:pointer;background:var(--folder-bg-accent);border-radius:14px 14px 0 0;border-left:4px solid var(--accent-color);align-items:center;margin-bottom:4px;">';
+            h += '<div class="folder-header draggable-folder" id="head-' + fid + '" data-category="' + fp + '" draggable="true" ondragstart="handleFolderDragStart(event, \'' + fp + '\')" ondragover="handleFolderDragOver(event)" ondrop="handleFolderDrop(event, \'' + fp + '\')" onclick="toggleGrupFolder(\'' + fid + '\')" style="padding:12px 14px 12px 45px;display:flex;justify-content:space-between;cursor:pointer;background:var(--folder-bg-accent);border-radius:14px 14px 0 0;border-left:4px solid var(--accent-color);align-items:center;margin-bottom:4px;position:relative;">';
             h += '<div><span class="folder-title-text"><i class="fa-regular fa-folder-open" style="color:var(--accent-color);margin-right:8px;"></i>' + fn + '</span><span class="folder-badge">' + tot + '</span></div>';
             h += '<i class="fa-solid fa-chevron-down" style="color:var(--slate-500);font-size:12px;transition:transform 0.2s;" id="icon-' + fid + '"></i></div>';
             h += '<div id="' + fid + '" style="display:' + fo + ';padding:4px;flex-direction:column;gap:3px;width:100%;">';
@@ -918,8 +1282,10 @@
                 h += '<div class="card-actions"><button class="action-btn" style="color:var(--slate-500);" onclick="editEntry(\'' + a.id + '\', \'vault\')">Edit</button><button class="action-btn" style="color:#ef4444;" onclick="deleteEntry(\'' + a.id + '\',\'vault\')">Hapus</button></div>';
                 h += '</div>'; }); h += '</div></div>'; }); return h; } c.innerHTML = genT(ft);
     }
-
-    // 📝 RENDER CATATAN (Folder header juga dilengkapi atribut drop target)
+    
+    // ==========================================
+    // 📝 RENDER CATATAN
+    // ==========================================
     function renderNotes(data) {
         const c = document.getElementById('account-list-container');
         if (!data || data.length === 0) { c.innerHTML = '<p style="text-align:center;color:var(--slate-500);padding:20px;">Belum ada catatan.</p>'; renderNotesStats(); return; }
@@ -929,8 +1295,8 @@
             function ci(f) { let s=f._items.length; Object.keys(f._subfolders).forEach(k => s+=ci(f._subfolders[k])); return s; }
             const ti = ci(fd); const ie = (filterKategoriAktif && filterKategoriAktif.toLowerCase()===fp.toLowerCase()) ? 'flex' : 'none';
             html += '<div style="margin-bottom:4px;">';
-            // ✅ Tambahan class="folder-header" dan data-category
-            html += '<div class="folder-header" data-category="'+fp+'" onclick="toggleGrupFolder(\''+fid+'\')" style="padding:8px 12px;display:flex;justify-content:space-between;cursor:pointer;background:var(--bg-surface);border-radius:12px 12px 0 0;border-left:3px solid var(--accent-color);align-items:center;margin-bottom:1px;">';
+            // ✅ Folder header dengan drag-drop enabled
+            html += '<div class="folder-header draggable-folder" data-category="'+fp+'" draggable="true" ondragstart="handleFolderDragStart(event, \''+fp+'\')" ondragover="handleFolderDragOver(event)" ondrop="handleFolderDrop(event, \''+fp+'\')" onclick="toggleGrupFolder(\''+fid+'\')" style="padding:8px 12px 8px 45px;display:flex;justify-content:space-between;cursor:pointer;background:var(--bg-surface);border-radius:12px 12px 0 0;border-left:3px solid var(--accent-color);align-items:center;margin-bottom:1px;position:relative;">';
             html += '<div><span class="folder-title-text" style="font-size:16px;"><i class="fa-regular fa-folder-open" style="color:var(--accent-color);margin-right:6px;font-size:16px;"></i>'+fn+'</span><span class="folder-badge">'+ti+'</span></div>';
             html += '<i class="fa-solid fa-chevron-down" style="color:var(--slate-500);font-size:11px;transition:transform 0.2s;" id="icon-'+fid+'"></i></div>';
             html += '<div id="'+fid+'" style="display:'+ie+';padding:2px;flex-direction:column;gap:2px;background:var(--bg-surface);border-radius:0 0 12px 12px;margin-bottom:4px;">';
@@ -957,9 +1323,16 @@
                 html += '</div></div>'; }); html += '</div></div>'; }); return html; }
         c.innerHTML = genNoteTree(nc); renderNotesStats();
     }
-
+    
+    // ==========================================
+    //  TOGGLE FOLDER (Expand/Collapse)
+    // ==========================================
     function toggleGrupFolder(id, f) { const el = document.getElementById(id); const icon = document.getElementById('icon-'+id); if(!el) return; let t = el.style.display==='none'?'flex':'none'; if(f!==null && f!==undefined) t = f; el.style.display = t; if(icon) { icon.style.transform = t==='flex'?'rotate(180deg)':'rotate(0deg)'; icon.style.transition = 'transform 0.15s ease'; } }
     function toggleDetailKonten(id, f) { const el = document.getElementById('det-'+id); if(!el) return; let t = el.style.display==='none'?'flex':'none'; if(f!==null && f!==undefined) t = f; el.style.display = t; }
+    
+    // ==========================================
+    // 🔍 NORMALISASI TEKS PENCARIAN
+    // ==========================================
     function normalizeText(text) {
         if (!text) return '';
         return String(text).toLowerCase().trim()
@@ -975,6 +1348,10 @@
         const words = normalizedQuery.split(' ').filter(w => w.length > 0);
         return words.every(word => normalizedText.includes(word));
     }
+    
+    // ==========================================
+    // 🔍 DROPDOWN PENCARIAN LANGSUNG
+    // ==========================================
     function liveSearchDropdown() {
         const rawQuery = document.getElementById('vault-search').value;
         const dc = document.getElementById('searchDropdownContainer'); const cb = document.getElementById('clearSearchBtn');
@@ -1033,6 +1410,10 @@
         }
     }
     function resetPencarian() { document.getElementById('vault-search').value = ""; document.getElementById('searchDropdownContainer').style.display = 'none'; document.getElementById('clearSearchBtn').style.display = 'none'; filterKategoriAktif = null; filterVault(); }
+    
+    // ==========================================
+    // 🔄 FILTER & PENGALIHAN TAB REAL-TIME
+    // ==========================================
     function filterVault() { 
         if(currentTab === 'catatan') { renderNotes(notes); return; } 
         let bd = accounts;
@@ -1072,11 +1453,29 @@
     function toggleFloatingMenu(e) { e.stopPropagation(); const m = document.getElementById('floating-menu'); m.style.display = m.style.display === 'block' ? 'none' : 'block'; }
     function bukaMenuTambah() { document.getElementById('floating-menu').style.display = 'none'; openModal('vault'); }
     function bukaMenuTambahNote() { document.getElementById('floating-menu').style.display = 'none'; openModal('notes'); }
+    
+    // ==========================================
+    // 🪟 FUNGSI BUKA/TUTUP MODAL
+    // ==========================================
     function openModal(t) { t = t || 'vault';
-        if(t === 'notes') { document.getElementById('noteModal').style.display = 'grid'; document.getElementById('note-form').reset(); document.getElementById('note-id').value = ""; document.getElementById('note-modal-title').innerText = "Catatan Baru"; }
-        else { document.getElementById('entryModal').style.display = 'grid'; document.getElementById('account-form').reset(); document.getElementById('entry-id').value = ""; document.getElementById('modal-title').innerText = "Kredensial Baru"; } }
-    function closeModal() { document.getElementById('entryModal').style.display = 'none'; document.getElementById('account-form').reset(); document.getElementById('entry-id').value = ""; }
-    function closeNoteModal() { document.getElementById('noteModal').style.display = 'none'; document.getElementById('note-form').reset(); document.getElementById('note-id').value = ""; }
+        if(t === 'notes') { 
+            document.getElementById('noteModal').style.display = 'grid'; 
+            document.getElementById('note-form').reset(); 
+            document.getElementById('note-id').value = ""; 
+            document.getElementById('note-kategori-input').value = ""; 
+            document.getElementById('note-modal-title').innerText = "Catatan Baru"; 
+        }
+        else { 
+            document.getElementById('entryModal').style.display = 'grid'; 
+            document.getElementById('account-form').reset(); 
+            document.getElementById('entry-id').value = ""; 
+            document.getElementById('kategori-input').value = ""; 
+            document.getElementById('modal-title').innerText = "Kredensial Baru"; 
+        } 
+    }
+    function closeModal() { document.getElementById('entryModal').style.display = 'none'; document.getElementById('account-form').reset(); document.getElementById('entry-id').value = ""; document.getElementById('kategori-input').value = ""; }
+    function closeNoteModal() { document.getElementById('noteModal').style.display = 'none'; document.getElementById('note-form').reset(); document.getElementById('note-id').value = ""; document.getElementById('note-kategori-input').value = ""; }
+    
     function bukaSettingsPin() { toggleSidebar(false); document.getElementById('pinSettingsModal').style.display = 'grid'; document.getElementById('pin-form').reset(); document.getElementById('pin-settings-error').style.display = 'none'; }
     function closePinSettings() { document.getElementById('pinSettingsModal').style.display = 'none'; document.getElementById('pin-form').reset(); document.getElementById('pin-settings-error').style.display = 'none'; }
     const pinToggle = document.getElementById('pin-toggle'); if (pinToggle) { pinToggle.addEventListener('change', function(e) {
@@ -1092,22 +1491,47 @@
         const currentHash = await hashPin(c); if(currentHash !== getPinHash()) { er.textContent = "PIN saat ini salah!"; er.style.display = 'block'; document.getElementById('pin-current').value = ''; document.getElementById('pin-current').focus(); return; }
         const newHash = await hashPin(n); localStorage.setItem('vault_pin_hash', newHash); closePinSettings();
         showToast("✅ PIN berhasil diubah!", "fa-key"); setTimeout(() => { if(confirm("PIN telah diubah. Login ulang dengan PIN baru?")) { sessionStorage.removeItem('vault_unlocked'); location.reload(); } }, 1000); }
+    
+    // ==========================================
+    // 📥 DROPDOWN KATEGORI CUSTOM
+    // ==========================================
     function bukaCustomDropdownLayer(ft) { ft = ft || 'vault'; document.getElementById('dropdownLayerModal').style.display = 'flex'; buildDropdownOptions(ft); }
     function tutupCustomDropdownLayer() { document.getElementById('dropdownLayerModal').style.display = 'none'; }
     function buildDropdownOptions(ft) { ft = ft || 'vault'; const sa = ft === 'notes' ? notes : accounts;
         const cats = [...new Set(sa.map(a => a.kategori).filter(k => k))];
         if(!cats.includes("Medsos")) cats.push("Medsos"); if(!cats.includes("Keuangan")) cats.push("Keuangan"); if(!cats.includes("Umum")) cats.push("Umum");
         document.getElementById('custom-options-container').innerHTML = cats.map(c => '<div class="dropdown-option-row" onclick="pilihKat(\''+c+'\')"><span><i class="fa-regular fa-folder" style="color:var(--accent-color);margin-right:8px;"></i>'+c+'</span><button type="button" class="delete-kat-btn" onclick="hapusKategoriMassal(\''+c+'\',event)"><i class="fa-solid fa-trash-can"></i></button></div>').join(''); }
-    function pilihKat(c) { nilaiKategoriTerpilled = c; const skv = document.getElementById('selected-kategori-view'); const snk = document.getElementById('selected-note-kategori');
-        if(skv) skv.innerText = c; if(snk) snk.innerText = c; document.getElementById('entry-kategori-baru').style.display = 'none'; document.getElementById('note-kategori-baru').style.display = 'none'; tutupCustomDropdownLayer(); }
-    function pilihKategoriBuatBaru() { nilaiKategoriTerpilled = "__BUAT_BARU__"; const skv = document.getElementById('selected-kategori-view'); const snk = document.getElementById('selected-note-kategori');
-        if(skv) skv.innerText = "Buat Baru..."; if(snk) snk.innerText = "Buat Baru..."; document.getElementById('entry-kategori-baru').style.display = 'block'; document.getElementById('note-kategori-baru').style.display = 'block'; tutupCustomDropdownLayer(); }
+    function pilihKat(c) { nilaiKategoriTerpilled = c; 
+        // ✅ Isi ke input kategori yang sesuai
+        if (currentDataType === 'notes' || document.getElementById('noteModal').style.display === 'grid') {
+            document.getElementById('note-kategori-input').value = c;
+        } else {
+            document.getElementById('kategori-input').value = c;
+        }
+        tutupCustomDropdownLayer(); 
+    }
+    function pilihKategoriBuatBaru() { nilaiKategoriTerpilled = "__BUAT_BARU__"; tutupCustomDropdownLayer(); 
+        // Fokus ke input kategori agar user bisa langsung ketik
+        if (currentDataType === 'notes' || document.getElementById('noteModal').style.display === 'grid') {
+            document.getElementById('note-kategori-input').focus();
+        } else {
+            document.getElementById('kategori-input').focus();
+        }
+    }
     async function hapusKategoriMassal(k, e) { e.stopPropagation(); const jd = accounts.filter(a => (a.kategori||'').toLowerCase()===k.toLowerCase()).length;
         if(!confirm(jd > 0 ? 'Hapus "'+k+'" & semua data?' : 'Hapus kosong "'+k+'"?')) return; tutupCustomDropdownLayer(); showToast("Menghapus...", "fa-spinner");
         const lh = accounts.filter(a => (a.kategori||'').toLowerCase()===k.toLowerCase()); if(lh.length === 0) { showToast("Kategori dibersihkan"); return; }
         try { for(let i of lh) { await fetch(apiUrl, { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: new URLSearchParams({action: "delete", id: i.id}) }); } showToast("Sukses Dihapus"); setTimeout(fetchData, 500); } catch(e) { showToast("Gagal menghapus", "fa-circle-xmark"); fetchData(); } }
+    
+    // ==========================================
+    // 💾 FUNGSI PENYIMPANAN DATA
+    // ==========================================
     async function submitData() { 
-        const id = document.getElementById('entry-id').value; let k = nilaiKategoriTerpilled; if(k === "__BUAT_BARU__") k = document.getElementById('entry-kategori-baru').value;
+        const id = document.getElementById('entry-id').value; 
+        // ✅ Ambil nilai dari input kategori yang bisa diketik
+        let k = document.getElementById('kategori-input').value.trim();
+        if (!k) k = nilaiKategoriTerpilled || "Umum";
+        
         const newData = { id: id || 'TEMP-'+Date.now(), kategori: k, nama_aplikasi: document.getElementById('entry-app').value, username: document.getElementById('entry-username').value, email: document.getElementById('entry-email').value, password: document.getElementById('entry-password').value, ket: document.getElementById('entry-ket').value, ket_dua: document.getElementById('entry-ket-dua').value, favorit: false };
         const duplikat = cekDuplikatVault(newData, id);
         if (duplikat.length > 0) { tampilkanKonfirmasiDuplikat(duplikat, 'vault', () => prosesSimpanVault(newData, id)); return; }
@@ -1119,9 +1543,13 @@
         const p = new URLSearchParams(); p.append("action", id ? "update" : "create"); p.append("data_type", "vault"); if(id) p.append("id", id); p.append("kategori", newData.kategori); p.append("nama_aplikasi", newData.nama_aplikasi); p.append("username", newData.username); p.append("email", newData.email); p.append("password", newData.password); p.append("ket", newData.ket); p.append("ket_dua", newData.ket_dua);
         fetch(apiUrl, { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: p }).catch(err => console.error('Sync failed:', err)); }
     async function submitNoteData() { 
-        const id = document.getElementById('note-id').value; let k = nilaiKategoriTerpilled; if(k === "__BUAT_BARU__") k = document.getElementById('note-kategori-baru').value;
+        const id = document.getElementById('note-id').value; 
+        // ✅ Ambil nilai dari input kategori yang bisa diketik
+        let k = document.getElementById('note-kategori-input').value.trim();
+        if (!k) k = nilaiKategoriTerpilled || "Umum";
+        
         const judul = document.getElementById('note-judul').value.trim(); if (!judul) { showToast("Judul wajib diisi!", "fa-circle-exclamation"); return; }
-        const newData = { id: id || 'TEMP-'+Date.now(), kategori: k || "Umum", judul: judul, isi: document.getElementById('note-isi').value, favorit: false, tanggal: new Date().toISOString() };
+        const newData = { id: id || 'TEMP-'+Date.now(), kategori: k, judul: judul, isi: document.getElementById('note-isi').value, favorit: false, tanggal: new Date().toISOString() };
         const duplikat = cekDuplikatNote(newData, id);
         if (duplikat.length > 0) { tampilkanKonfirmasiDuplikat(duplikat, 'notes', () => prosesSimpanNote(newData, id)); return; }
         prosesSimpanNote(newData, id);
@@ -1131,21 +1559,64 @@
         if (currentTab === 'catatan') renderNotes(notes); showToast("✅ Catatan tersimpan!", "fa-check-circle");
         const p = new URLSearchParams(); p.append("action", id ? "update" : "create"); p.append("data_type", "notes"); if(id) p.append("id", id); p.append("kategori", newData.kategori); p.append("judul", newData.judul); p.append("isi", newData.isi);
         fetch(apiUrl, { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: p }).catch(err => console.error('Sync failed:', err)); }
+    
+    // ==========================================
+    // ✏️ EDIT ENTRY
+    // ==========================================
     function editEntry(id, t) { t = t || 'vault'; const s = t === 'notes' ? notes : accounts; const a = s.find(x => String(x.id) === String(id)); if(!a) return;
         lastViewContext = {tab: currentTab, filter: filterKategoriAktif, itemId: id};
-        if(t === 'notes') { document.getElementById('noteModal').style.display = 'grid'; document.getElementById('note-form').reset(); document.getElementById('note-id').value = a.id; nilaiKategoriTerpilled = a.kategori; document.getElementById('selected-note-kategori').innerText = a.kategori; document.getElementById('note-judul').value = a.judul; document.getElementById('note-isi').value = a.isi || ''; document.getElementById('note-modal-title').innerText = "Edit Catatan"; }
-        else { document.getElementById('entryModal').style.display = 'grid'; document.getElementById('account-form').reset(); document.getElementById('entry-id').value = a.id; nilaiKategoriTerpilled = a.kategori; document.getElementById('selected-kategori-view').innerText = a.kategori; document.getElementById('entry-app').value = a.nama_aplikasi; document.getElementById('entry-username').value = a.username; document.getElementById('entry-email').value = a.email; document.getElementById('entry-password').value = a.password; document.getElementById('entry-ket').value = a.ket || ''; document.getElementById('entry-ket-dua').value = a.ket_dua || ''; document.getElementById('modal-title').innerText = "Edit Kredensial"; } }
+        if(t === 'notes') { 
+            document.getElementById('noteModal').style.display = 'grid'; 
+            document.getElementById('note-form').reset(); 
+            document.getElementById('note-id').value = a.id; 
+            nilaiKategoriTerpilled = a.kategori; 
+            document.getElementById('note-kategori-input').value = a.kategori; 
+            document.getElementById('note-judul').value = a.judul; 
+            document.getElementById('note-isi').value = a.isi || ''; 
+            document.getElementById('note-modal-title').innerText = "Edit Catatan"; 
+        }
+        else { 
+            document.getElementById('entryModal').style.display = 'grid'; 
+            document.getElementById('account-form').reset(); 
+            document.getElementById('entry-id').value = a.id; 
+            nilaiKategoriTerpilled = a.kategori; 
+            document.getElementById('kategori-input').value = a.kategori; 
+            document.getElementById('entry-app').value = a.nama_aplikasi; 
+            document.getElementById('entry-username').value = a.username; 
+            document.getElementById('entry-email').value = a.email; 
+            document.getElementById('entry-password').value = a.password; 
+            document.getElementById('entry-ket').value = a.ket || ''; 
+            document.getElementById('entry-ket-dua').value = a.ket_dua || ''; 
+            document.getElementById('modal-title').innerText = "Edit Kredensial"; 
+        } 
+    }
     function editNote(id) { editEntry(id, 'notes'); }
+    
+    // ==========================================
+    // ️ DELETE ENTRY
+    // ==========================================
     function deleteEntry(id, t) { t = t || 'vault'; if(!confirm("Hapus permanen?")) return;
         if (t === 'notes') { const idx = notes.findIndex(n => String(n.id) === String(id)); if (idx !== -1) notes.splice(idx, 1); if (currentTab === 'catatan') renderNotes(notes); }
         else { const idx = accounts.findIndex(a => String(a.id) === String(id)); if (idx !== -1) accounts.splice(idx, 1); if (currentTab === 'catatan') renderNotes(notes); else filterVault(); }
         showToast("🗑️ Data dihapus", "fa-trash");
         fetch(apiUrl, { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: new URLSearchParams({action: "delete", id: id, data_type: t}) }).catch(err => { console.error('Delete sync failed:', err); showToast("⚠️ Gagal sync ke cloud", "fa-cloud"); fetchData(t, true); }); }
+    
+    // ==========================================
+    // 🔄 PULL-TO-REFRESH
+    // ==========================================
     let startY = 0; let isPulling = false; const appContainer = document.querySelector('.app-container');
     if (appContainer) { appContainer.addEventListener('touchstart', e => { if (this.scrollTop === 0) { startY = e.touches[0].pageY; isPulling = true; } }, { passive: true });
         appContainer.addEventListener('touchmove', e => { if (isPulling && this.scrollTop === 0) { const cy = e.touches[0].pageY; if (cy - startY > 100) { showToast('🔄 Refreshing...', 'fa-sync'); fetchData(); isPulling = false; } } }, { passive: true });
         appContainer.addEventListener('touchend', () => isPulling = false); }
+    
+    // ==========================================
+    // 🚀 INISIALISASI EVENT DRAG
+    // ==========================================
     if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initDragEvents); } else { initDragEvents(); }
+    
+    // ==========================================
+    // 📤 EKSPOR FUNGSI KE GLOBAL WINDOW
+    // ==========================================
     window.toggleThemeMode = toggleThemeMode; window.showToast = showToast; window.handlePinInput = handlePinInput; window.handlePinKeydown = handlePinKeydown;
     window.toggleSidebar = toggleSidebar; window.kunciBrankasMendadak = kunciBrankasMendadak; window.saveAPI = saveAPI; window.fetchData = fetchData;
     window.toggleFavoriteCloud = toggleFavoriteCloud; window.togglePasswordEye = togglePasswordEye; window.toggleDetailKonten = toggleDetailKonten;
@@ -1167,6 +1638,8 @@
     window.tampilkanKonfirmasiDuplikat = tampilkanKonfirmasiDuplikat; window.prosesSimpanVault = prosesSimpanVault;
     window.prosesSimpanNote = prosesSimpanNote;
     window.moveToCategory = moveToCategory; window.syncCategoryChange = syncCategoryChange;
+    window.handleFolderDragStart = handleFolderDragStart; window.handleFolderDragOver = handleFolderDragOver;
+    window.handleFolderDrop = handleFolderDrop; window.reorderFolders = reorderFolders; window.syncFolderOrder = syncFolderOrder;
 })();
 </script>
 </body>
